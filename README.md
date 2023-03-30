@@ -1,3 +1,5 @@
+[![CI](https://github.com/Tecleck/iperf3/actions/workflows/ci.yml/badge.svg)](https://github.com/Tecleck/iperf3/actions/workflows/ci.yml)
+
 Role Name
 =========
 
