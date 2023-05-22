@@ -1,0 +1,16 @@
+---
+- name: Create group "{{ iperf_system_group }}"
+  become: true
+  ansible.builtin.group:
+    name: "{{ iperf_system_group }}"
+    system: true
+    state: "present"
+
+- name: Add the user "{{ iperf_system_user }}"
+  become: true
+  ansible.builtin.user:
+    name: "{{ iperf_system_user }}"
+    comment: "Iperf user"
+    group: "{{ iperf_system_group }}"
+    shell: '/sbin/nologin'
+    state: "present"

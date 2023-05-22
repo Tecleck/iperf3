@@ -1,2 +1,7 @@
 ---
 # defaults file for iperf3
+iperf_system_user: 'iperf'
+iperf_system_group: 'iperf'
+
+iperf__packages: 'iperf3'
+iperf__package_state: 'present'           # change state to latest for upgrading iperf3

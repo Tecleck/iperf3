@@ -1,2 +1,7 @@
 ---
 # tasks file for iperf3
+- name: Create iperf user and group
+  ansible.builtin.include_tasks: user.yml
+
+- name: Install iperf3
+  ansible.builtin.include_tasks: install.yml
