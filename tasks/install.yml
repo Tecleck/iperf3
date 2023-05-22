@@ -1,5 +1,5 @@
 ---
-- name: update repository cache for debian/ubuntu
+- name: Update repository cache for debian/ubuntu
   become: true
   ansible.builtin.apt:
     update_cache: true
@@ -7,7 +7,7 @@
   when:
     - ansible_pkg_mgr == "apt"
 
-- name: install iperf
+- name: Install iperf
   become: true
   ansible.builtin.package:
     name: "{{ iperf__package }}"
