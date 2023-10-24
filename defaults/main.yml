@@ -3,5 +3,5 @@
 iperf_system_user: 'iperf'
 iperf_system_group: 'iperf'
 
-iperf_packages: 'iperf3'
+iperf_package: 'iperf3'
 iperf_package_state: 'present'           # change state to latest for upgrading iperf3
