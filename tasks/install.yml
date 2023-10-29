@@ -5,8 +5,8 @@
     update_cache: true
     cache_valid_time: 3600
 
-- name: Install iperf
+- name: Install iperf3
   become: true
   ansible.builtin.package:
-    name: "{{ iperf_package }}"
-    state: "{{ iperf_package_state }}"
+    name: "{{ iperf3_package }}"
+    state: "{{ iperf3_package_state }}"
