@@ -1,9 +1,10 @@
 ---
 # handlers file for iperf3
-- name: Systemctl restart iperf3.target
-  become: true
-  ansible.builtin.systemd:
-    name: iperf3.target
-    state: restarted
-    daemon_reload: true
-  when: iperf3_systemd_enable | bool
+handlers:
+   - name: Restart iperf3
+     become: true
+     ansible.builtin.systemd:
+        name: iperf3.target
+        state: restarted
+        daemon_reload: true
+     when: iperf3_systemd_enable | bool

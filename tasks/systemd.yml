@@ -7,9 +7,9 @@
     mode: 0644
     group: root
     owner: root
-  notify: systemctl restart iperf3.target
+  notify: Restart iperf3
 
-- name: Deploy systemd iperf3.target
+- name: Deploy systemd iperf3
   become: true
   ansible.builtin.template:
     src: 'templates/iperf3.target.j2'
@@ -17,7 +17,7 @@
     mode: 0644
     group: root
     owner: root
-  notify: systemctl restart iperf3.target
+  notify: Restart iperf3
 
 - name: Enable systemd iperf3.target
   become: true
@@ -26,7 +26,7 @@
     enabled: true
     masked: false
   when: iperf3_systemd_enable | bool
-  notify: systemctl restart iperf3.target
+  notify: Restart iperf3
 
 - name: Masked systemd iperf3.target
   become: true
