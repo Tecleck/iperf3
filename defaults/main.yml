@@ -1,7 +1,12 @@
 ---
 # defaults file for iperf3
-iperf_system_user: 'iperf'
-iperf_system_group: 'iperf'
+iperf3_system_user: 'iperf3'
+iperf3_system_group: 'iperf3'
 
-iperf_package: 'iperf3'
-iperf_package_state: 'present'           # change state to latest for upgrading iperf3
+iperf3_package: 'iperf3'
+iperf3_package_state: 'present'           # change state to latest for upgrading iperf3
+
+# run systemd service with an iperf3 server (true/false)
+iperf3_systemd_enable: true
+iperf3_options: '--server'   # nog aanpassen in een mooie lijst
+iperf3_port_range: "5000-5005"
