@@ -29,6 +29,20 @@ Including an example of how to use your role (for instance, with variables passe
       roles:
          - { role: username.rolename, x: 42 }
 
+Systemd
+----------------
+
+Start all iperf3 instances: $ systemctl start iperf3.target
+Stop all iperf3 instances: $  systemctl stop iperf3.target
+
+Start a single iperf3 instance: $ systemctl start iperf3@<port number>.service
+Example:
+$ systemctl start iperf3@5000.service
+
+Stop a single iperf3 instance: $ systemctl stop iperf3@<port number>.service
+Example:
+$ systemctl stop iperf3@5000.service
+
 License
 -------
 
