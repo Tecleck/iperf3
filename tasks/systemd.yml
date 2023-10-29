@@ -1,0 +1,47 @@
+---
+- name: Deploy systemd iperf3@.service
+  become: true
+  ansible.builtin.template:
+    src: 'templates/iperf3.service.j2'
+    dest: '/etc/systemd/system/iperf3@.service'
+    mode: 0644
+    group: root
+    owner: root
+  notify: systemctl restart iperf3.target
+
+- name: Deploy systemd iperf3.target
+  become: true
+  ansible.builtin.template:
+    src: 'templates/iperf3.target.j2'
+    dest: '/etc/systemd/system/iperf3.target'
+    mode: 0644
+    group: root
+    owner: root
+  notify: systemctl restart iperf3.target
+
+- name: Enable systemd iperf3.target
+  become: true
+  ansible.builtin.systemd:
+    name: 'iperf3@target'
+    enabled: true
+    masked: false
+  when: iperf3_systemd_enable | bool
+  notify: systemctl restart iperf3.target
+
+- name: Masked systemd iperf3.target
+  become: true
+  ansible.builtin.systemd:
+    name: 'iperf.target'
+    state: stopped
+    enabled: false
+    masked: true
+  when: not iperf3_systemd_enable | bool
+
+- name: Masked systemd iperf3@.service
+  become: true
+  ansible.builtin.systemd:
+    name: 'iperf@.service'
+    state: stopped
+    enabled: false
+    masked: true
+  when: not iperf3_systemd_enable | bool

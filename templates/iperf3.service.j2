@@ -1,0 +1,15 @@
+[Unit]
+Description="iperf3 Server running on port #%i"
+After=network.target
+PartOf=iperf3.target
+
+[Service]
+Type=simple
+User={{ iperf3_system_user }}
+Group={{ iperf3_system_group }}
+ExecStart=iperf3 {{ iperf3_options }} --port %i
+Restart=always
+
+
+[Install]
+WantedBy=multi-user.target

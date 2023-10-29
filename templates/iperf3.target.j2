@@ -1,0 +1,9 @@
+[Unit]
+Description="all iperf3 servers"
+Requires={% set start_port, end_port = {{ iperf3_port_range }}.split('-') | map('int') %}
+{% for port in range(start_port, end_port+1) %}
+    iperf3@{{ port }}.service
+{% endfor %}
+
+[Install]
+WantedBy=multi-user.target
