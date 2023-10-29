@@ -7,7 +7,7 @@
     mode: 0644
     group: root
     owner: root
-  notify: Restart iperf3
+  register: result_service
 
 - name: Deploy systemd iperf3
   become: true
@@ -17,21 +17,29 @@
     mode: 0644
     group: root
     owner: root
-  notify: Restart iperf3
+  register: result_target
 
-- name: Enable systemd iperf3.target
+- name: Reload systemd daemon and restart iperf3
+  become: true
+  ansible.builtin.systemd:
+    name: iperf3.target
+    state: restarted
+    daemon_reload: true
+  when: iperf3_systemd_enable | bool   # hier nog registers zodat als het resultaat veranderd is je de daemon reload
+
+
+- name: Enable iperf3.target to start at system boot
   become: true
   ansible.builtin.systemd:
     name: 'iperf3@target'
     enabled: true
     masked: false
-  when: iperf3_systemd_enable | bool
-  notify: Restart iperf3
+  when: iperf3_systemd_enable | bool   # hier nog registers zodat als het resultaat veranderd is je de daemon reload
 
 - name: Masked systemd iperf3.target
   become: true
   ansible.builtin.systemd:
-    name: 'iperf.target'
+    name: 'iperf3.target'
     state: stopped
     enabled: false
     masked: true
@@ -40,7 +48,7 @@
 - name: Masked systemd iperf3@.service
   become: true
   ansible.builtin.systemd:
-    name: 'iperf@.service'
+    name: 'iperf3@.service'
     state: stopped
     enabled: false
     masked: true
